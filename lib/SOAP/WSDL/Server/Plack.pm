@@ -155,7 +155,11 @@ sub psgi_app {
 
 __PACKAGE__->meta->make_immutable();
 
-=head2 COPYRIGHT AND LICENCE
+=head1 SEE ALSO
+
+L<SOAP::WSDL::Server::Plack::Transport> - transport class
+
+=head1 COPYRIGHT AND LICENCE
 
 Copyright 2013 by futureLAB AG under the perl
 

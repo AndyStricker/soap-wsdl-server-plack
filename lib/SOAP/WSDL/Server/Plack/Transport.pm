@@ -1,6 +1,8 @@
 package SOAP::WSDL::Server::Plack::Transport;
 use Moose;
 
+# ABSTRACT: Plack Server Transport for SOAP::WSDL
+
 use Carp;
 use Try::Tiny;
 
@@ -9,20 +11,46 @@ use Try::Tiny;
 # of inheritance we use a delegate pattern
 use SOAP::WSDL::Server;
 
+=head1 ATTRIBUTES
+
+=over
+
+=item action_map_ref
+
+Action map parameter forwarded to L<SOAP::WSDL::Server>
+
+=cut
+
 has 'action_map_ref' => (
 	is => 'rw',
 	isa => 'HashRef',
 );
+
+=item class_resolver
+
+Class resolver parameter forwarded to L<SOAP::WSDL::Server>
+
+=cut
 
 has 'class_resolver' => (
 	is => 'rw',
 	isa => 'Str',
 );
 
+=item dispatch_to
+
+Dispatch to parameter forwarded to L<SOAP::WSDL::Server>
+
+=cut
+
 has 'dispatch_to' => (
 	is => 'rw',
 	isa => 'Str',
 );
+
+=back
+
+=cut
 
 # private server instance for delegate
 has '_soap_wsdl_server' => (
@@ -47,6 +75,8 @@ has '_soap_wsdl_server' => (
 	)],
 	documentation => 'Carry SOAP::WSDL::Server instance to delegate to',
 );
+
+=head1 METHODS
 
 =head2 handle
 
@@ -117,4 +147,16 @@ sub handle {
 };
 
 __PACKAGE__->meta->make_immutable();
+
+=head1 SEE ALSO
+
+L<SOAP::WSDL::Server::Plack> - Server adaptor
+
+=head1 COPYRIGHT AND LICENCE
+
+Copyright 2013 by futureLAB AG under the perl
+
+This module is free software and is published under the same terms as Perl itself.
+
+=cut
 
