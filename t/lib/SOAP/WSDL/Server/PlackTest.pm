@@ -84,7 +84,7 @@ sub server_test : Test(6) {
 		# steal uri from request
 		my $uri = $request->uri->clone();
 		$uri->path('/');
-		diag $uri;
+		note 'Temporary web server url: ' . $uri;
 
 		my $if = Example::Interfaces::HelloWorld::HelloWorldSoap->new({
 			proxy => $uri->as_string(),
