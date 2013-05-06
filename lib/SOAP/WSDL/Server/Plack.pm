@@ -20,6 +20,20 @@ L<SOAP::WSDL::Server> interface.
 This is mostly based on L<SOAP::WSDL::Server::Mod_Perl2> implementation
 and adapted for Plack.
 
+=head1 SYNOPSIS
+
+	use Plack::Runner;
+	use SOAP::WSDL::Server::Plack;
+
+	my $app = SOAP::WSDL::Server::Plack({
+		dispatch_to => 'My::SOAPMethodImplementation',
+		soap_service => 'My::Server::SimpleServer::SimpleServerSoap',
+	})->psgi_app();
+
+	my $runner = Plack::Runner->new;
+	$runner->parse_options(@ARGV);
+	$runner->run($app);
+
 =head1 ATTRIBUTES
 
 =over
