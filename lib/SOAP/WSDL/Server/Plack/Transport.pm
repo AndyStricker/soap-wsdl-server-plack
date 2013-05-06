@@ -11,6 +11,11 @@ use Try::Tiny;
 # of inheritance we use a delegate pattern
 use SOAP::WSDL::Server;
 
+=head1 DESCRIPTION
+
+Transport class for L<SOAP::WSDL::Server::Plack>. Don't use it
+directly.
+
 =head1 ATTRIBUTES
 
 =over

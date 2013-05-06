@@ -71,11 +71,11 @@ has 'soap_service' => (
 	documentation => 'Perl module with the SOAP::WSDL server implementation',
 );
 
-=item transport_class
+=item transport_class I<optional>
 
 Transport class
 
-I<optional>.
+If not specified it defaults to L<SOAP::WSDL::Server::Plack::Transport>
 
 =cut
 
