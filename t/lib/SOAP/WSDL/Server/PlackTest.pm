@@ -7,11 +7,6 @@ use warnings;
 use Carp;
 use Test::More;
 use Test::Exception;
-use HTTP::Request::Common qw(GET POST PUT DELETE);
-use HTTP::Status qw(:constants);
-use Plack::Test;
-# You may add this to trace SOAP calls
-#use SOAP::Lite +trace => [qw(all)];
 
 use SOAP::WSDL::Server::Plack;
 
@@ -64,46 +59,19 @@ sub app_test : Test(4) {
 	is(ref($app), 'CODE', 'Got a code ref as app from psgi_app()');
 }
 
-sub server_test : Test(6) {
+sub example_soap_test : Test(3) {
 	my ($self) = @_;
 
 	use_ok('Example::Server::HelloWorld::HelloWorldSoap');
 	use_ok('Example::Interfaces::HelloWorld::HelloWorldSoap');
 
-	my $app = SOAP::WSDL::Server::Plack->new({
+	my $app;
+	$app = SOAP::WSDL::Server::Plack->new({
 		dispatch_to => 'Example::HelloWorldImpl',
 		soap_service => 'Example::Server::HelloWorld::HelloWorldSoap',
 	})->psgi_app();
 
-	test_psgi $app, sub {
-		my $cb = shift;
-		my $request = GET '/';
-		my $res = $cb->($request);
-		is($res->code, HTTP_LENGTH_REQUIRED);
-
-		# steal uri from request
-		my $uri = $request->uri->clone();
-		$uri->path('/');
-		note 'Temporary web server url: ' . $uri;
-
-		my $if = Example::Interfaces::HelloWorld::HelloWorldSoap->new({
-			proxy => $uri->as_string(),
-		});
-
-		my $response;
-		lives_ok(sub {
-			$response = $if->sayHello({
-				name => 'Wall',
-				givenName => 'Larry',
-			});
-		}, 'Calling interface works');
-
-		ok($response, 'Got successful result');
-		unless ($response) {
-			diag "$response";
-		}
-		is($response->get_sayHelloResult(), 'Hello Larry Wall');
-	};
+	is(ref($app), 'CODE', 'Got a code ref as app from psgi_app()');
 }
 
 1;
