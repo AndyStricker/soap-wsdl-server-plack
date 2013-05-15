@@ -157,11 +157,5 @@ __PACKAGE__->meta->make_immutable();
 
 L<SOAP::WSDL::Server::Plack> - Server adaptor
 
-=head1 COPYRIGHT AND LICENCE
-
-Copyright 2013 by futureLAB AG under the perl
-
-This module is free software and is published under the same terms as Perl itself.
-
 =cut
 

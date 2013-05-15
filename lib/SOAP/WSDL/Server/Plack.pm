@@ -25,7 +25,7 @@ and adapted for Plack.
 	use Plack::Runner;
 	use SOAP::WSDL::Server::Plack;
 
-	my $app = SOAP::WSDL::Server::Plack({
+	my $app = SOAP::WSDL::Server::Plack->new({
 		dispatch_to => 'My::SOAPMethodImplementation',
 		soap_service => 'My::Server::SimpleServer::SimpleServerSoap',
 	})->psgi_app();
@@ -173,11 +173,4 @@ __PACKAGE__->meta->make_immutable();
 
 L<SOAP::WSDL::Server::Plack::Transport> - transport class
 
-=head1 COPYRIGHT AND LICENCE
-
-Copyright 2013 by futureLAB AG under the perl
-
-This module is free software and is published under the same terms as Perl itself.
-
 =cut
-
